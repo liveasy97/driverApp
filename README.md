@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # driver_app
 
 Liveasy flutter app for driver application
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# driverApp
+>>>>>>> 4cde7ec6a77285db395e17dbfb94a082318bb80b

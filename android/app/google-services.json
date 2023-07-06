@@ -14,13 +14,57 @@
       },
       "oauth_client": [
         {
-          "client_id": "356140900885-cunldq6ohr0vk86ef97dsg99bpskoo0r.apps.googleusercontent.com",
+          "client_id": "356140900885-m76j9mdj5ueubp3cnnh8van58pha2s3j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.driver_app",
             "certificate_hash": "b26280a37d43af457a3a49d75d8e636916bef26e"
           }
         },
+        {
+          "client_id": "356140900885-me72rh4k9fsbbqd5b6ep1dvu049nhncs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.driver_app",
+            "certificate_hash": "70a7ebd66f90b6390ba95aedb1649bc3eb4dd7b4"
+          }
+        },
+        {
+          "client_id": "356140900885-hdgs9m5eim4vpn5211am78ruvd08q13s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcj8efe6W2MrH4vgytcdCL9eUw8iuJicc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356140900885-hdgs9m5eim4vpn5211am78ruvd08q13s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "356140900885-ujq667slevo675sid42gc8cghdhd1feu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.driverApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356140900885:android:5bd5bf562a6bb4f3c4e41c",
+        "android_client_info": {
+          "package_name": "com.liveasy.driver"
+        }
+      },
+      "oauth_client": [
         {
           "client_id": "356140900885-hdgs9m5eim4vpn5211am78ruvd08q13s.apps.googleusercontent.com",
           "client_type": 3

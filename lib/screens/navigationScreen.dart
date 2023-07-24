@@ -21,16 +21,13 @@ class _NavigationScreenState extends State<NavigationScreen>{
     super.initState();
 
     checkPermissionStatus();
-
   }
   void checkPermissionStatus() async {
-    var notificationPermissionStatus = Permission.notification.status;
-    var locationAlwaysPermissionStatus = Permission.locationAlways.status;
+    var notificationPermissionStatus = await Permission.notification.status;
+    var locationAlwaysPermissionStatus = await Permission.locationAlways.status;
 
-    if(await notificationPermissionStatus.isGranted && await locationAlwaysPermissionStatus.isGranted){
-      setState(() {
+    if(notificationPermissionStatus.isGranted && locationAlwaysPermissionStatus.isGranted){
         navigateFlag = true;
-      });
     }
 
   }

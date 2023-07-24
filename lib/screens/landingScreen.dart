@@ -57,7 +57,19 @@ class _LandingScreenState extends State<LandingScreen>{
     showDialog(context: context,
       builder: (BuildContext context) => AlertDialog(
       title: Text('Some Permission Required'),
-      content: Text('Please enable location and other permissions for this app to function properly.'),
+      content: Container(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Driver App needs to collects location data to enable tracking system even when the app is closed or not in use'),
+            SizedBox(height: 10,),
+            Text('Please allow location all the time and other permissions for this app to function properly.'),
+          ],
+        ),
+      ),
       actions: [
         TextButton(
           child: Text('Open Settings'),
@@ -125,7 +137,7 @@ class _LandingScreenState extends State<LandingScreen>{
     Timer.periodic(const Duration(seconds: 10), (timer) async{
       if(service is AndroidServiceInstance){
         //set foreground notification
-        service.setForegroundNotificationInfo(title: "Location Tracking is On", content: "Sending Location");
+        service.setForegroundNotificationInfo(title: "Location Tracking is on", content: "Driver App got your location in the background");
         print("timer");
         fetchLocation();
       }
@@ -145,6 +157,13 @@ class _LandingScreenState extends State<LandingScreen>{
       Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
+
+
+      // double speed;
+      //
+      // Geolocator.getPositionStream().listen((position) {
+      //    speed = position.speed; // This is your speed
+      // });
 
 
       double lat = position.latitude;
@@ -181,12 +200,13 @@ class _LandingScreenState extends State<LandingScreen>{
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(
+          title: Text("Landing Page", style:TextStyle(color: Colors.black)),),
       backgroundColor: backgroundColor,
       body: Center(
-        child: Text("This is Landing Page", style: TextStyle(color:Color.fromRGBO(0, 160, 227, 1),fontSize: 25),),
-      ),
-    );
+        child: Text("Location Tracking is ON",style: TextStyle(color:Color.fromRGBO(0, 160, 227, 1),fontSize: 25)),
+    ));
   }
 
 }

@@ -94,17 +94,35 @@ class _PermissionScreenState extends State<PermissionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Permission Screen", style: TextStyle(color: Colors.black),),
+      ),
       backgroundColor: backgroundColor,
-      body: Center(
-            child: FilledButton(
+      body: Container(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('Driver App collects location data to enable tracking system even when the app is closed or not in use',style: TextStyle(fontSize: 20),),
+            SizedBox(height: 10,),
+            Text('Please allow location all the time and other permissions for this app to function properly.',style: TextStyle(fontSize: 20),),
+            SizedBox(height: 30,),
+            FilledButton(
               onPressed: () {if(flag){allowLocationAlways();}
-                            else{checkPermissionStatus();}},
+              else{checkPermissionStatus();}},
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.cyan),
-                padding: MaterialStateProperty.all(EdgeInsets.only(left: 80,right: 80,bottom: 20,top: 20))
+                  shape: MaterialStatePropertyAll<RoundedRectangleBorder>(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.cyan),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(left: 80,right: 80,bottom: 20,top: 20))
               ),
               child: Text("Continue", style: TextStyle(color:Colors.black,fontSize: 20, fontWeight: FontWeight.bold, fontFamily:'montserrat' ),),
-            )),
+            ),
+          ],
+        ),
+      )
 
     );
   }

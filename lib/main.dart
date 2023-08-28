@@ -32,7 +32,6 @@ void main() async {
   await GetStorage.init('TransporterIDStorage');
   await FlutterConfig.loadEnvVariables();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.clear();
   runApp(MyApp());
 }
 

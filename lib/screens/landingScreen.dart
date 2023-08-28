@@ -23,12 +23,12 @@ class LandingScreen extends StatefulWidget{
 }
 
 class _LandingScreenState extends State<LandingScreen>{
+  bool? trackingMode;
   @override
   void initState(){
     super.initState();
 
     var firebaseId = FirebaseAuth.instance.currentUser?.uid;
-    // var transporterId = tidstorage.read("transporterId");
     var mobileNum = tidstorage.read("mobileNum");
 
     firebaseId ??= "1234567890";
@@ -43,14 +43,16 @@ class _LandingScreenState extends State<LandingScreen>{
     var notificationStatus = await Permission.notification.status;
     if(locationStatus.isDenied || notificationStatus.isDenied){
       //move to permission screen
+      trackingMode = false;
       showDialogToMovePermission();
     }
     else{
-      print("$firebaseId $mobileNum");
+      trackingMode = true;
       addDevice(firebaseId, mobileNum);
       backgroundService();
-
     }
+    setState(() {
+    });
   }
 
   void showDialogToMovePermission(){
@@ -205,7 +207,7 @@ class _LandingScreenState extends State<LandingScreen>{
           title: Text("Landing Page", style:TextStyle(color: Colors.black)),),
       backgroundColor: backgroundColor,
       body: Center(
-        child: Text("Location Tracking is ON",style: TextStyle(color:Color.fromRGBO(0, 160, 227, 1),fontSize: 25)),
+        child: Text((trackingMode ?? false)?"Location Tracking is ON":"Location Tracking is OFF",style: TextStyle(color:Color.fromRGBO(0, 160, 227, 1),fontSize: 25)),
     ));
   }
 

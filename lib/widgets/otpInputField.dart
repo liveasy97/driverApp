@@ -30,11 +30,7 @@ class _OTPInputFieldState extends State<OTPInputField> {
   IsOtpInvalidController isOtpInvalidController =
       Get.put(IsOtpInvalidController());
   TextEditingController textEditingController = TextEditingController();
-  @override
-  void dispose() {
-    textEditingController.dispose();
-    super.dispose();
-  }
+
 
   @override
   void initState() {

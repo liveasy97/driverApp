@@ -44,6 +44,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
 
   }
 
+  //First user have to allow location permission then only we can request for location always permission for android level 10 or higher application.
   void allowLocationAlways() async{
     //open dialog window
 

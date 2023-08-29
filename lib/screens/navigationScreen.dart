@@ -23,6 +23,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
   }
 
   void checkFirstTimeInstalled() async {
+    //check user runs the apps for first time or not
+    // for first time login user will be redirect based on all permissions are allowed or not otherwise user will be navigate to landing screen
     prefs = await SharedPreferences.getInstance();
     firstTime = prefs.getBool('first_time_running') ?? true;
 
@@ -37,6 +39,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   }
 
   void checkPermissionStatus() async {
+    //check whether location and notification permission is allowed or not, without locationAlways permission background service for location will not work
     var notificationPermissionStatus = await Permission.notification.status;
     var locationAlwaysPermissionStatus = await Permission.locationAlways.status;
 
@@ -64,6 +67,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //until loading variable becomes false user will see a circular progress bar.
     return loading
         ? Container(
             child: Center(

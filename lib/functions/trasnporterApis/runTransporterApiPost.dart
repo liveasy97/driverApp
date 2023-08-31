@@ -45,7 +45,7 @@ Future<String?> runTransporterApiPost(
       if (value != null) {
         log("firebase registration token =========> " + value);
       }
-      createTraccarUserAndNotifications(value, mobileNum);
+      // createTraccarUserAndNotifications(value, mobileNum);
     });
 
     if (response.statusCode == 201) {

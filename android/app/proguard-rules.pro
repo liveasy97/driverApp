@@ -1,1 +1,1 @@
--keep class com.example.driver_app.BuildConfig { *; }
+-keep class com.liveasy.driver.BuildConfig { *; }

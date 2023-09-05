@@ -1,15 +1,8 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:driver_app/constants/color.dart';
-import 'package:driver_app/constants/fontSize.dart';
 import 'package:driver_app/constants/fontWeights.dart';
-import 'package:driver_app/constants/radius.dart';
 import 'package:driver_app/constants/spaces.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:driver_app/screens/LoginScreens/loginScreen.dart';
-import 'package:driver_app/screens/navigationScreen.dart';
-import 'package:driver_app/widgets/loadingWidgets/bottomProgressBarIndicatorWidget.dart';
 
 class GetStartedButton extends StatefulWidget {
   Function? onTapNext;
@@ -23,26 +16,57 @@ class GetStartedButton extends StatefulWidget {
 class _GetStartedButtonState extends State<GetStartedButton> {
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        // highlightColor: Colors.transparent,
-        onPressed: () {
-          widget.onTapNext!();
-        },
-        child: Container(
-          height: space_8,
-          decoration: BoxDecoration(
-            color: darkBlueColor,
-            borderRadius: BorderRadius.circular(radius_6),
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    return Positioned(
+      left: space_5,
+      top: height * 0.76,
+      child: SizedBox(
+        width: width * 0.8,
+        height: space_11,
+        child: TextButton(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50))),
+            backgroundColor: MaterialStateProperty.all<Color>(white),
           ),
-          child: Center(
-            child: Text(
-              'getStarted'.tr,
-              // "Get Started",
-              style: TextStyle(
-                  color: white, fontWeight: mediumBoldWeight, fontSize: size_8),
+          onPressed: () {
+            widget.onTapNext!();
+          },
+          child: Text(
+            'getStarted'.tr,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: darkBlueColor,
+              fontSize: space_4,
+              fontFamily: 'Montserrat',
+              fontWeight: mediumBoldWeight,
             ),
           ),
-        ));
+        ),
+      ),
+    );
+    // TextButton(
+    //   // highlightColor: Colors.transparent,
+    //   onPressed: () {
+    //     widget.onTapNext!();
+    //   },
+    //   child: Container(
+    //     height: space_8,
+    //     decoration: BoxDecoration(
+    //       color: darkBlueColor,
+    //       borderRadius: BorderRadius.circular(radius_6),
+    //     ),
+    //     child: Center(
+    //       child: Text(
+    //         'getStarted'.tr,
+    //         // "Get Started",
+    //         style: TextStyle(
+    //             color: white, fontWeight: mediumBoldWeight, fontSize: size_8),
+    //       ),
+    //     ),
+    //   ));
     //   GestureDetector(
     //   onTap: (){
     //     widget.onTapNext!();

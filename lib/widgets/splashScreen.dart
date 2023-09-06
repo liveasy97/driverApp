@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import '../constants/color.dart';
 import '../constants/fontSize.dart';
 import '../constants/fontWeights.dart';
-import '../screens/languageScreen.dart';
+import '../screens/languageSelectionScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(const Duration(seconds: 3),
-        () => Get.off(() => const LanguageScreen()));
+        () => Get.off(() => const LanguageSelectionScreen()));
     super.initState();
   }
 

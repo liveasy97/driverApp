@@ -47,44 +47,5 @@ class _GetStartedButtonState extends State<GetStartedButton> {
         ),
       ),
     );
-    // TextButton(
-    //   // highlightColor: Colors.transparent,
-    //   onPressed: () {
-    //     widget.onTapNext!();
-    //   },
-    //   child: Container(
-    //     height: space_8,
-    //     decoration: BoxDecoration(
-    //       color: darkBlueColor,
-    //       borderRadius: BorderRadius.circular(radius_6),
-    //     ),
-    //     child: Center(
-    //       child: Text(
-    //         'getStarted'.tr,
-    //         // "Get Started",
-    //         style: TextStyle(
-    //             color: white, fontWeight: mediumBoldWeight, fontSize: size_8),
-    //       ),
-    //     ),
-    //   ));
-    //   GestureDetector(
-    //   onTap: (){
-    //     widget.onTapNext!();
-    //   },
-    //   child: Container(
-    //     height: space_8,
-    //     decoration: BoxDecoration(
-    //         color: darkBlueColor,
-    //         borderRadius: BorderRadius.circular(radius_6)),
-    //     child: Center(
-    //       child: Text(
-    //         'getStarted'.tr,
-    //         // "Get Started",
-    //         style: TextStyle(
-    //             color: white, fontWeight: mediumBoldWeight, fontSize: size_8),
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }

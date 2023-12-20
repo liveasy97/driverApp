@@ -1,47 +1,44 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:driver_app/constants/color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:driver_app/constants/color.dart';
-import 'package:driver_app/constants/fontSize.dart';
-import 'package:driver_app/constants/fontWeights.dart';
-import 'package:driver_app/constants/radius.dart';
-import 'package:driver_app/constants/spaces.dart';
-import 'package:driver_app/controller/transporterIdController.dart';
-import 'package:driver_app/functions/trasnporterApis/runTransporterApiPost.dart';
-import 'package:driver_app/language/localization_service.dart';
-import 'package:driver_app/providerClass/providerData.dart';
-import 'package:driver_app/screens/navigationScreen.dart';
-import 'package:driver_app/widgets/buttons/getStartedButton.dart';
-import 'package:driver_app/widgets/loadingWidgets/bottomProgressBarIndicatorWidget.dart';
-import 'package:provider/provider.dart';
 
+import '../constants/fontSize.dart';
+import '../constants/fontWeights.dart';
+import '../constants/spaces.dart';
+import '../controller/transporterIdController.dart';
+import '../functions/trasnporterApis/runTransporterApiPost.dart';
+import '../language/localization_service.dart';
+import '../widgets/buttons/getStartedButton.dart';
+import '../widgets/loadingWidgets/bottomProgressBarIndicatorWidget.dart';
 import 'LoginScreens/loginScreen.dart';
+import 'navigationScreen.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
-  LanguageSelectionScreen({Key? key}) : super(key: key);
+  const LanguageSelectionScreen({super.key});
 
   @override
-  _LanguageSelectionScreenState createState() =>
+  State<LanguageSelectionScreen> createState() =>
       _LanguageSelectionScreenState();
 }
 
-class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> with AutomaticKeepAliveClientMixin<LanguageSelectionScreen>{
-  String currentItem = 'English'; //added this
+class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
+  String valueChoose = "Hindi";
   String? transporterId;
   bool _nextScreen = false;
   TransporterIdController transporterIdController =
-  Get.put(TransporterIdController(), permanent: true);
+      Get.put(TransporterIdController(), permanent: true);
   @override
   void initState() {
     super.initState();
     getData();
-    currentItem = LocalizationService().getCurrentLang();  //added this
+    valueChoose = LocalizationService().getCurrentLang(); //added this
   }
-  Function? onTapNext(){
+
+  Function? onTapNext() {
     Get.to(bottomProgressBarIndicatorWidget());
     Get.off(() => NavigationScreen());
   }
+
   getData() async {
     bool? transporterApproved;
     bool? companyApproved;
@@ -51,25 +48,18 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> with 
     String? name;
     String? companyName;
 
-    //transporterId = await runTransporterApiPost(
-      //mobileNum: FirebaseAuth
-        //.instance.currentUser!.phoneNumber
-        //.toString()
-        //.substring(3, 13),
-    //);
-
-    if (transporterId != null){
+    if (transporterId != null) {
       setState(() {
-        _nextScreen=true;
+        _nextScreen = true;
       });
-    }
-    else {
+    } else {
       setState(() {
         transporterId = tidstorage.read("transporterId");
         transporterApproved = tidstorage.read("transporterApproved");
         companyApproved = tidstorage.read("companyApproved");
         mobileNum = tidstorage.read("mobileNum");
-        accountVerificationInProgress = tidstorage.read("accountVerificationInProgress");
+        accountVerificationInProgress =
+            tidstorage.read("accountVerificationInProgress");
         transporterLocation = tidstorage.read("transporterLocation");
         name = tidstorage.read("name");
         companyName = tidstorage.read("companyName");
@@ -83,189 +73,150 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> with 
         transporterIdController.updateTransporterApproved(transporterApproved!);
         transporterIdController.updateCompanyApproved(companyApproved!);
         transporterIdController.updateMobileNum(mobileNum!);
-        transporterIdController
-            .updateAccountVerificationInProgress(accountVerificationInProgress!);
+        transporterIdController.updateAccountVerificationInProgress(
+            accountVerificationInProgress!);
         transporterIdController.updateTransporterLocation(transporterLocation!);
         transporterIdController.updateName(name!);
         transporterIdController.updateCompanyName(companyName!);
         print("transporterID is $transporterId");
         setState(() {
-        _nextScreen=true;
-      });
+          _nextScreen = true;
+        });
       }
-      //setState(() {
-        //_nextScreen=true;
-      //});
     }
   }
 
+  List<String> listItem = ["Hindi", "English"];
+
   @override
   Widget build(BuildContext context) {
-
-    // final provider = Provider.of<ProviderData>(context);
-    // final currentItem = provider.languageItem;
-    // currentItem = LocalizationService().getCurrentLang();  //added this
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: white,
-      body: Padding(
-        padding: EdgeInsets.only(left: space_4, right: space_4),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Card(
-              child: Container(
-                height: MediaQuery.of(context).size.height / 1.5,
-                child: Padding(
-                  padding:
-                  EdgeInsets.fromLTRB(space_5, space_8, space_5, space_0),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: space_5, right: space_5),
-                        child: Image(
-                            image: AssetImage("assets/icons/welcomeIcon.png")),
+      backgroundColor: darkBlueColor,
+      body: Stack(
+        children: [
+          Positioned(
+            left: space_5,
+            top: height * 0.5,
+            child: Text(
+              'selectLanguage'.tr,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: white,
+                fontSize: size_12,
+                fontFamily: 'Montserrat',
+                fontWeight: mediumBoldWeight,
+              ),
+            ),
+          ),
+          Positioned(
+              left: space_2,
+              top: height * 0.57,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Container(
+                  width: width * 0.8,
+                  height: height * 0.07,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(space_3),
+                    child: DropdownButton(
+                      icon: const Icon(
+                        Icons.arrow_drop_down,
+                        color: darkBlueColor,
                       ),
-                      Text('welcome'.tr,  // changed this
-                        // AppLocalizations.of(context)!.welcome,
-                        style: TextStyle(
-                            fontSize: size_11, fontWeight: boldWeight),
+                      isExpanded: true,
+                      underline: SizedBox(),
+                      iconSize: size_16,
+                      style: const TextStyle(
+                        color: darkBlueColor,
+                        fontSize: 24,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(
-                        height: space_6,
-                      ),
-                      Text('selectLanguage'.tr, //changed this
-                        // AppLocalizations.of(context)!.selectLanguage,
-                        style: TextStyle(
-                            fontSize: size_10, fontWeight: normalWeight),
-                      ),
-                      SizedBox(
-                        height: space_5,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                // selectLanguageItem(context, LanguageItem.English);
-                                // provider.setLocale(Locale('en'));
-                                //change here
-                                setState(() {
-                                  var locale = Locale('en', 'US');
-                                  Get.updateLocale(locale);
-                                  currentItem = 'English';
-                                  LocalizationService().changeLocale(currentItem);
-                                });
-                              },
-                              child: Container(
-                                height: space_8,
-                                decoration: BoxDecoration(
-                                    border: Border.all(width: 1,
-                                        color:currentItem == 'English' ? navy : darkGreyColor //change here
-                                    ),
-                                    borderRadius:
-                                        BorderRadius.circular(radius_1)),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      "English",
-                                      style: TextStyle(
-                                          color: currentItem == 'English' ? navy : darkGreyColor, //change here
-                                          fontSize: size_9,
-                                          fontWeight: normalWeight),
-                                    ),
-                                    Container(
-                                      child: currentItem == 'English' ? Image( //chenge here
-                                        image: AssetImage("assets/icons/tick.png"),
-                                        width: space_3,
-                                        height: space_3,
-                                      ): Container(),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: space_2,
-                          ),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                  // selectLanguageItem(context, LanguageItem.Hindi);
-                                  // provider.setLocale(Locale('hi'));
-                                //change here
-                                setState(() {
-                                  var locale = Locale('hi', 'IN');
-                                  Get.updateLocale(locale);
-                                  currentItem = 'Hindi';
-                                  LocalizationService().changeLocale(currentItem);
-                                });
-                              },
-                              child: Container(
-                                height: space_8,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        width: 1,
-                                        color: currentItem == 'Hindi' ? navy : darkGreyColor    //change here
-                                    ),
-                                    borderRadius:
-                                        BorderRadius.circular(radius_1)),
-                                child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      "हिन्दी",
-                                      style: TextStyle(
-                                          color: currentItem == 'Hindi' ? navy : darkGreyColor,   //change here
-                                          fontSize: size_9,
-                                          fontWeight: normalWeight),
-                                    ),
-                                Container(
-                                  child: currentItem == 'Hindi' ? Image(   //change here
-                                    image: AssetImage("assets/icons/tick.png"),
-                                    width: space_3,
-                                    height: space_3,
-                                  ): Container(),),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: space_5,
-                      ),
-                      _nextScreen?
-                      GetStartedButton(onTapNext: this.onTapNext,) : GetStartedButton(onTapNext: (){
-                        Get.off(LoginScreen());
-                      },)
-
-                    ],
+                      value: valueChoose,
+                      onChanged: (newValue) {
+                        setState(() {
+                          if (newValue != null) {
+                            valueChoose = newValue;
+                            if (listItem[0] == valueChoose) {
+                              var locale = const Locale('hi', 'IN');
+                              Get.updateLocale(locale);
+                              valueChoose = 'Hindi';
+                            } else {
+                              var locale = const Locale('en', 'US');
+                              Get.updateLocale(locale);
+                              valueChoose = 'English';
+                            }
+                            LocalizationService().changeLocale(valueChoose);
+                          }
+                        });
+                      },
+                      items: listItem.map((valueItem) {
+                        return DropdownMenuItem(
+                          value: valueItem,
+                          child: Text(valueItem),
+                        );
+                      }).toList(),
+                    ),
                   ),
                 ),
+              )),
+          Positioned(
+            left: space_4,
+            top: space_27,
+            child: Container(
+              width: width * 0.9,
+              height: height * 0.3,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/truckImage.png"),
+                  fit: BoxFit.fill,
+                ),
               ),
-              color: white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(radius_5),
-              ),
-            )
-          ],
-        ),
+            ),
+          ),
+          Positioned(
+              top: space_0,
+              right: space_0,
+              child: Container(
+                width: width * 0.6,
+                height: height * 0.16,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/circularDesignTop.png"),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              )),
+          Positioned(
+              bottom: space_0,
+              right: space_0,
+              child: Container(
+                width: width * 0.6,
+                height: height * 0.14,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/circularDesignBottom.png"),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              )),
+          _nextScreen
+              ? GetStartedButton(
+                  onTapNext: this.onTapNext,
+                )
+              : GetStartedButton(
+                  onTapNext: () {
+                    Get.off(LoginScreen());
+                  },
+                ),
+        ],
       ),
     );
   }
-
-  void selectLanguageItem(BuildContext context, LanguageItem item) {
-    final provider = Provider.of<ProviderData>(context, listen: false);
-    provider.setLanguageItem(item);
-  }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }

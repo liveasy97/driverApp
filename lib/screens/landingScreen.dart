@@ -34,11 +34,11 @@ class _LandingScreenState extends State<LandingScreen>{
     firebaseId ??= "1234567890";
     mobileNum ??= "default";
 
-    permissionChecking(firebaseId, mobileNum);
+    permissionChecking(mobileNum, mobileNum);
 
   }
 
-  void permissionChecking(String firebaseId, String mobileNum) async {
+  void permissionChecking(String phoneNo, String mobileNum) async {
     var locationStatus = await Permission.locationAlways.status;
     var notificationStatus = await Permission.notification.status;
     if(locationStatus.isDenied || notificationStatus.isDenied){
@@ -48,7 +48,7 @@ class _LandingScreenState extends State<LandingScreen>{
     }
     else{
       trackingMode = true;
-      addDevice(firebaseId, mobileNum);
+      addDevice(phoneNo, mobileNum);
       backgroundService();
     }
     setState(() {
@@ -151,10 +151,10 @@ class _LandingScreenState extends State<LandingScreen>{
 
       late String? serverAddress = FlutterConfig.get("traccarLocationApi");
 
-      var firebaseId = FirebaseAuth.instance.currentUser?.uid;
+      var mobileNum = tidstorage.read("mobileNum");
       // var transporterId = tidstorage.read("transporterId");
 
-      firebaseId ??= "1234567890";
+      mobileNum ??= "1234567890";
 
       Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
@@ -183,10 +183,10 @@ class _LandingScreenState extends State<LandingScreen>{
       DateTime now = DateTime.now();
 
 
-      print("got the location $lat, $lng, $hdop, $altitude, $speed, $firebaseId");
+      print("got the location $lat, $lng, $hdop, $altitude, $speed, $mobileNum");
 
       final url = Uri.parse(
-          "http://$serverAddress/?id=$firebaseId&lat=$lat&lon=$lng&timestamp=${now.toUtc().toString()}&hdop=$hdop&altitude=$altitude&speed=$speed");
+          "http://$serverAddress/?id=$mobileNum&lat=$lat&lon=$lng&timestamp=${now.toUtc().toString()}&hdop=$hdop&altitude=$altitude&speed=$speed");
 
 
       final response = await http.post(url);
